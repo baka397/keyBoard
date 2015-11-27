@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>测试keyboard</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+</head>
+<body>
+    <script type="text/javascript" src="./src/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="./src/keyboard.min.js"></script>
+    <script type="text/javascript">
+    var key_config={
+        'a':function(){//单键配置
+            alert('this is a!');
+        },
+        'shift-a':function(){//使用组合键配置
+            alert('this is shift+a');
+        }
+    }
+    var keyboard=new keyBoard(key_config);//加载配置文件
+    keyboard.on();//执行
+    </script>
+</body>
