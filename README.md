@@ -51,3 +51,14 @@ var key_config={
 }
 keyboard.update(key_config,{forbidden:'ctrl'});
 ```
+
+## 释放后执行
+可以通过配置default，监控所有按键释放后执行的内容
+```
+var key_config={
+    'default':function(){
+        console.log('所有按键均已释放');
+    }
+}
+keyboard.update(key_config);
+```
