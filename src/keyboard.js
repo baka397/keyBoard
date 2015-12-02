@@ -122,7 +122,7 @@
 			$(document).on('keyup',function(e){
 				//判断执行函数
 				if(typeof _this.rule[_this.press_key]==='function'){
-					new _this.rule[_this.press_key];
+					_this.rule[_this.press_key].call();
 				}
 				//清空按键情况
 				if(_this.press_key){
@@ -134,7 +134,7 @@
 					}
 				}
 				if(_this.press_key===''&&_this.rule['default']){
-					new _this.rule['default'];
+					_this.rule['default'].call();
 				}
 			});
 		},
