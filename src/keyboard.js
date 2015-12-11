@@ -3,6 +3,7 @@
 
 * 依赖：无
 * 创建：2015-10-20
+* 更新：1.0.2 更新回调函数用法
  */
 ;(function(window){
 	/**
@@ -97,20 +98,24 @@
 		 * @param  {object} list 监听事件列表
 		 */
 		update:function(rule){
+			this.rule=null;
 			this.rule=rule;
 		},
 		on:function(){
+			this.press_key='';
 			var _this=this;
 			$(document).on('keydown',function(e){
 				var key=getCode(e.keyCode);
+				//console.log('key名：'+key);
 				//更新键盘组合键
 				if(key&&_this.press_key){
 					var rule='(^|\\-)'+key+'(\\-|$)';
 					var regexp=new RegExp(rule);
 					if(!regexp.test(_this.press_key)) _this.press_key+='-'+key;
 				}else{
-					_this.press_key=getCode(e.keyCode);
+					_this.press_key=key;
 				}
+				//console.log(_this.press_key);
 				if(key&&_this.press_key){
 					var rule='(^|\\-)'+_this.option.forbidden+'(\\-|$)';
 					var regexp=new RegExp(rule);
@@ -122,7 +127,7 @@
 			$(document).on('keyup',function(e){
 				//判断执行函数
 				if(typeof _this.rule[_this.press_key]==='function'){
-					_this.rule[_this.press_key].call();
+					_this.rule[_this.press_key].call(_this);
 				}
 				//清空按键情况
 				if(_this.press_key){
@@ -134,11 +139,13 @@
 					}
 				}
 				if(_this.press_key===''&&_this.rule['default']){
-					_this.rule['default'].call();
+					_this.rule['default'].call(_this);
 				}
+				//console.log('放开时目前按键：'+_this.press_key);
 			});
 		},
 		off:function(){
+			this.press_key='';
 			$(document).off('keydown');
 			$(document).off('keyup');
 		}
