@@ -3,7 +3,6 @@
 
 * 依赖：无
 * 创建：2015-10-20
-* 更新：1.0.2 更新回调函数用法
  */
 ;(function(window){
 	/**
@@ -143,11 +142,15 @@
 				}
 				//console.log('放开时目前按键：'+_this.press_key);
 			});
+			$(window).on('blur',function(){
+				_this.press_key='';
+			});
 		},
 		off:function(){
 			this.press_key='';
 			$(document).off('keydown');
 			$(document).off('keyup');
+			$(window).off('blur');
 		}
 	}
 	window.keyBoard=keyboard;
